@@ -8,7 +8,6 @@ build nixtract with upstreamed patches (no new version yet):
 
 ```
 nixtract --target-attribute-path python312Packages --target-flake-ref github:NixOS/nixpkgs/54271156702fc3a3f5d156df567a2a4a274bac6b > output.json
-cat output.json | jq -r '.nixpkgs_metadata.purl + " " + .nixpkgs_metadata.pname' | sort | uniq > purls.txt
 ```
 
 python312Packages contains around 10238 first-level derivations: https://search.nixos.org/packages?channel=25.11&query=python312Packages
