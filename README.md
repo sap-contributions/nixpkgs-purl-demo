@@ -18,6 +18,14 @@ bash-5.3# zcat output.json.gz | jq -r '.nixpkgs_metadata.purl + " " + .nixpkgs_m
 1911
 ```
 
+focussing on the python derivations only, you can achieve 97% of purl match rate out of the box:
+```
+bash-5.3# zcat output.json.gz | jq -r '.nixpkgs_metadata.purl + " " + .name' | sort | uniq | grep -v "pkg:" | grep "python3.12-" | wc -l
+302
+bash-5.3# zcat output.json.gz | jq -r '.nixpkgs_metadata.purl + " " + .name' | sort | uniq | grep "pkg:" | grep "python3.12-" | wc -l
+9648
+```
+
 out of them around 8k are github and around 17% of them have a homepage different to the code source
 ```
 bash-5.3# zcat output.json.gz | jq -r '.nixpkgs_metadata.purl + " " + .nixpkgs_metadata.pname + " " + .nixpkgs_metadata.homepage' | sort | uniq | grep ":github" | wc -l
